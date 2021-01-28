@@ -50,7 +50,7 @@ public class Bank {
     public static void main(String[] args){
         Bank bank = new Bank();
         bank.loadAccounts();
-        bank.accounts.get(0).deposit(30.0);
+        bank.accounts.get(0).deposit(50.0);
         bank.accounts.get(0).transFerFunds(45,bank.accounts.get(1));
         bank.displayAccounts();
         bank.applyInterest();
