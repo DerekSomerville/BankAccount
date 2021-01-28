@@ -1,4 +1,4 @@
-public class SavingAccount extends BankAccount{
+public class SavingAccount extends BankAccount {
 
     private double interestRate;
 
@@ -18,7 +18,13 @@ public class SavingAccount extends BankAccount{
         return result;
     }
 
-    public void applyInterest(){
-        balance += balance * (interestRate/100);
+    public String toString(){
+        return super.toString() + " " +  interestRate;
     }
+
+    public boolean applyInterest(){
+        balance += balance * (interestRate/100);
+        return true;
+    }
+
 }
