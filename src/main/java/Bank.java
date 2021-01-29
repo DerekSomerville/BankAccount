@@ -6,6 +6,14 @@ public class Bank {
     private List<BankAccount> accounts = new ArrayList<BankAccount>();
     private CSVLoader csvLoader = new CSVLoader();
 
+    public List<BankAccount> getAccounts() {
+        return accounts;
+    }
+
+    public void setCsvLoader(CSVLoader csvLoader) {
+        this.csvLoader = csvLoader;
+    }
+
     protected BankAccount createAccount(Person person, double interestRate) {
         BankAccount account;
         if (interestRate > 0){
