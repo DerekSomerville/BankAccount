@@ -16,6 +16,10 @@ public class Bank {
         return account;
     }
 
+    protected BankAccount createAccount(String[] rawAccount){
+        return createAccount(createPerson(rawAccount), getInterestRate(rawAccount));
+    }
+
     protected double getInterestRate(String[] rawAccount){
         double interestRate = 0.0;
         if (rawAccount.length == 4) {
@@ -24,13 +28,19 @@ public class Bank {
         return interestRate;
     }
 
-    protected void loadAccounts(List<String[]> rawAccounts){
+    protected Person createPerson(String[] rawAccount){
+        return new Person(rawAccount[Person.titleCol],rawAccount[Person.firstNameCol],rawAccount[Person.lastNameCol]);
+    }
+
+    protected List<String[]> removeHeader(List<String[]> rawAccounts){
         String[] header = rawAccounts.remove(0);
-        Person person;
+        return rawAccounts;
+    }
+
+    protected void loadAccounts(List<String[]> rawAccounts){
+        rawAccounts = removeHeader(rawAccounts);
         for (String[] rawAccount: rawAccounts) {
-            person = new Person(rawAccount[0],rawAccount[1],rawAccount[2]);
-            BankAccount account = createAccount(person, getInterestRate(rawAccount));
-            accounts.add(account);
+            accounts.add(createAccount(rawAccount));
         }
     }
 
@@ -39,14 +49,19 @@ public class Bank {
         loadAccounts(rawAccounts);
     }
 
+    protected String createNewLineMessage(String existingMessage, String newMessage){
+        if (existingMessage == "") {
+            existingMessage = newMessage;
+        } else {
+            existingMessage += System.lineSeparator() + newMessage;
+        }
+        return existingMessage;
+    }
+
     protected String displayAccounts(List<BankAccount> accounts){
         String accountDetails = "";
         for (BankAccount account : accounts){
-            if (accountDetails == "") {
-                accountDetails = account.toString();
-            } else {
-                accountDetails += System.lineSeparator() + account.toString();
-            }
+            accountDetails = createNewLineMessage(accountDetails, account.toString());
         }
         return accountDetails;
     }
