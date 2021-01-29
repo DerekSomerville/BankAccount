@@ -1,8 +1,13 @@
 public class Person {
 
+    static final int titleCol = 0;
+    static final int firstNameCol = 1;
+    static final int lastNameCol = 2;
+
     private String title;
     private String firstName;
     private String lastName;
+
 
     public Person(String title, String firstName, String lastName){
         this.title = title;
